@@ -1,12 +1,8 @@
-public class MathCourse implements Course{
-    @Override
-    public void deliverContent()
-    {
-        System.out.println("Deliver math content");
+public class MathCourse implements Course {
+    public void deliverContent() {
+        System.out.println("Learning Math...");
     }
-    @Override
-    public String getName()
-    {
-        return "Math";
+    public String getName() {
+        return "MathCourse";
     }
 }

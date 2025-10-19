@@ -1,26 +1,31 @@
 import java.util.*;
 
 public class Leaderboard {
-    private Map<String, Integer> board = new HashMap<>();
+    private Hashtable<Integer, Integer> scores = new Hashtable<>();
+    private Hashtable<Integer, String> names = new Hashtable<>();
 
-    public void addPoints(String sname, int points) {
-        board.put(sname, board.getOrDefault(sname, 0) + points);
+    public void addPoints(Student student, int points) {
+        int id = student.id;
+        scores.put(id, scores.getOrDefault(id, 0) + points);
+        names.put(id, student.name);
     }
 
-    public void show() {
-        System.out.println("\nLeaderboard");
-        if (board.isEmpty()) {
-            System.out.println("No students with points");
+    public void showLeaderboard() {
+        if (scores.isEmpty()) {
+            System.out.println("No students for leaderboard yet");
             return;
         }
-        List<Map.Entry<String, Integer>> list = new ArrayList<>(board.entrySet());
-        list.sort((a, b) -> b.getValue() - a.getValue());
+
+        System.out.println("\nLeaderboard");
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<>(scores.entrySet());
+
+        list.sort((a, b) -> b.getValue().compareTo(a.getValue()));
 
         int rank = 1;
-        for (Map.Entry<String, Integer> entry : board.entrySet()) {
-            System.out.println(rank + ". " + entry.getKey() + " - " + entry.getValue());
-            rank++;
-
+        for (Map.Entry<Integer, Integer> entry : list) {
+            int id = entry.getKey();
+            int points = entry.getValue();
+            System.out.println(rank++ + ". " + names.get(id) + " (ID: " + id + ") - " + points + " pts");
         }
     }
 }

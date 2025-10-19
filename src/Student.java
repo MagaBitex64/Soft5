@@ -1,20 +1,22 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student {
-    private String name;
-    private int CourseGrade;
+    String name;
+    int year;
+    List<Course> enrolledCourses = new ArrayList<>();
+    private static int nid=1;
+    int id;
 
-    public void setCourseGrade(int courseGrade) {
-        CourseGrade = courseGrade;
-    }
-
-    public void setName(String name) {
+    public Student(String name, int year) {
+        this.id = nid++;
         this.name = name;
+        this.year = year;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getCourseGrade() {
-        return CourseGrade;
+    @Override
+    public String toString()
+    {
+        return id+": "+name+" (Year "+year+")";
     }
 }

@@ -1,33 +1,20 @@
-public class GamificationDecorator extends CourseDecorator{
-    private Student[] students;
-    private int points;
+public class GamificationDecorator extends CourseDecorator {
     private Leaderboard leaderboard;
-    public GamificationDecorator(Course selCourse, Student[] students, Leaderboard leaderboard)
-    {
-        super(selCourse);
-        this.students = students;
-        this.points = 0;
-        this.leaderboard = leaderboard;
+    private Student student;
+
+    public GamificationDecorator(Course c, Leaderboard lb, Student student) {
+        super(c);
+        leaderboard = lb;
+        this.student = student;
     }
 
-    @Override
-    public void deliverContent()
-    {
-        super.deliverContent();
-        addPoints(10,);
-    }
-    @Override
-    public String getName()
-    {
-        return selCourse.getName()+" Gamification";
+    public void deliverContent() {
+        course.deliverContent();
+        System.out.println("Gamification enabled!");
     }
 
-
-    public void addPoints(int scores, int index)
-    {
-        points+=scores;
-        leaderboard.addPoints(students[index].getName(),points);
-        System.out.println(students[index]+" get "+ scores +"(Total "+points+" )");
+    public void addPoints() {
+        leaderboard.addPoints(student, 10);
+        System.out.println(student.name + " earned "+10+" points");
     }
 }
-
